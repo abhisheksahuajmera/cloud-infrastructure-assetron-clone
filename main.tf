@@ -8,6 +8,6 @@ module "securing_adb2c" {
   source                  = "./modules/adb2c"
   country_code            = var.resource_group_location_country_code
   data_residency_location = var.resource_group_data_residency_location
-  display_name            = azurecaf_name.adb2c_name.result
+  display_name            = local.adb2c_name_modified
   resource_group_name     = module.bootstrapping_resource_group.rg_name
 }
