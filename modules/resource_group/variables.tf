@@ -32,8 +32,13 @@ variable "azure_provider" {
   description = "Azure Provider Configuration"
 }
 
-data "azurerm_resource_group" "example" {
-  provider = var.azure_provider
+# data "azurerm_resource_group" "example" {
+#   provider = var.azure_provider
+# }
+
+
+variable "resource_group_name" {
+  description = "Azure Provider Configuration"
 }
 
 # data "azurecaf_name" "rg_example" {

@@ -17,3 +17,22 @@
 #     resource_group_type = "app_rg"      # Type of resource group (app_rg, data_rg, etc.)
 #   }
 # }
+
+# bootstrapping_resource_group
+# resource "azurecaf_name" "rg_caf_name" {
+#   name            = "demogroup"
+#     resource_type   = "azurerm_resource_group"
+#     prefixes        = ["a", "b"]
+#     suffixes        = ["y", "z"]
+#     random_length   = 5
+#     clean_input     = true
+# }
+
+data "azurecaf_name" "rg_example" {
+  name          = "demogroup"
+  resource_type = "azurerm_resource_group"
+  prefixes      = ["a", "b"]
+  suffixes      = ["y", "z"]
+  random_length = 5
+  clean_input   = true
+}
