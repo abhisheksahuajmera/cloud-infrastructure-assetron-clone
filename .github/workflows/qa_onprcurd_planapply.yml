@@ -89,7 +89,7 @@ jobs:
           terraform validate
 
       - name: Run> terraform plan
-        id: tf-plan
+        id: tf-plan-qa
         run: |
           cd "${{ env.WORKING_DIR}}"
           terraform plan -detailed-exitcode -input=false -var-file="${{ env.CONFIG_DIR }}/${{ env.CONFIG_FILE }}"
@@ -176,4 +176,4 @@ jobs:
       - name: Run> terraform apply
         run: |
           cd "${{ env.WORKING_DIR}}"
-          terraform apply -auto-approve
+          terraform apply -auto-approve -var-file="${{ env.CONFIG_DIR }}/${{ env.CONFIG_FILE }}"

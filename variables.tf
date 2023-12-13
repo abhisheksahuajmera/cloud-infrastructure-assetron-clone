@@ -60,5 +60,4 @@ variable "resource_group_data_residency_location" {
 
 locals {
   resource_group_name     = "${var.project_prefix}-${var.environment}-${var.environment_version}-${var.resource_group_prefix}-${var.resource_group_version}"
-  resource_group_location = var.resource_group_location
 }
