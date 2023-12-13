@@ -111,7 +111,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: tf-plan-qa
     if: |
-      needs.tf-plan-qa.outputs.tf-plan-exit-code == 2 && (startsWith(github.ref, 'refs/heads/feature_qa') || github.ref == 'refs/heads/qa')
+      needs.tf-plan-qa.outputs.tf-plan-exit-code == 2
 
     defaults:
       run:

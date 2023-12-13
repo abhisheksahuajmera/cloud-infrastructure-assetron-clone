@@ -111,8 +111,8 @@ jobs:
 
     runs-on: ubuntu-latest
     needs: tf-plan-dev
-    if: |
-      needs.tf-plan-dev.outputs.tf-plan-exit-code == 2
+    # if: |
+    #   needs.tf-plan-dev.outputs.tf-plan-exit-code == 2
 
     defaults:
       run:
