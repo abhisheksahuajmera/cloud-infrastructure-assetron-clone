@@ -1,4 +1,4 @@
-resource "azurerm_resource_group" "azurerm_resource_grouptg" {
-  name     = "${var.name}"
-  location = "${var.location}"
+resource "azurerm_resource_group" "rg" {
+  name     = azurecaf_name.rg_name.result
+  location = var.location
 }

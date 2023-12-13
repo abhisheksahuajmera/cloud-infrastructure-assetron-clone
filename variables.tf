@@ -4,20 +4,14 @@ variable "org" {
   default     = ""
 }
 
-variable "project" {
-  type        = string
-  description = "Project Name"
-  default     = ""
-}
-
 variable "project_prefix" {
   type        = string
   description = "Project Prefix"
   default     = ""
 }
 
-variable "environment" {
-  description = "Environment Name (ex. DEV, STAGING, PROD)"
+variable "environment_prefix" {
+  description = "Environment Prefix (ex. DEV, STAGING, PROD)"
   type        = string
   default     = ""
 }
@@ -28,15 +22,15 @@ variable "environment_version" {
   default     = ""
 }
 
-variable "resource_group_version" {
-  type        = string
-  description = "Resource Group Version"
-  default     = ""
-}
-
 variable "resource_group_prefix" {
   type        = string
   description = "Resource Group Prefix"
+  default     = ""
+}
+
+variable "resource_group_version" {
+  type        = string
+  description = "Resource Group Version"
   default     = ""
 }
 
@@ -56,8 +50,4 @@ variable "resource_group_data_residency_location" {
   type        = string
   description = "Resource Group Data Residency Location"
   default     = ""
-}
-
-locals {
-  resource_group_name     = "${var.project_prefix}-${var.environment}-${var.environment_version}-${var.resource_group_prefix}-${var.resource_group_version}"
 }
