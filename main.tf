@@ -6,6 +6,9 @@ module "bootstrapping_resource_group" {
   environment_version    = var.environment_version
   resource_group_prefix  = var.resource_group_prefix
   resource_group_version = var.resource_group_location
+  providers = {
+    azurecaf = azurecaf
+  }
 }
 
 module "securing_adb2c" {

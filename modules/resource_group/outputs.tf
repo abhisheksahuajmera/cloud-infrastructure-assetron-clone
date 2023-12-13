@@ -10,5 +10,5 @@ output "rg_location" {
 
 output "rg_id" {
   description = "Resource Group ID"
-  value       = azurerm_resource_group.azurerm_resource_grouptg.id
+  value       = azurerm_resource_group.rg_tg.id
 }
