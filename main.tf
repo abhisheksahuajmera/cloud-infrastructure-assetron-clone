@@ -1,7 +1,7 @@
 module "bootstrapping_resource_group" {
   source   = "./modules/resource_group"
   name     = local.resource_group_name
-  location = var.resource_group_location
+  location = local.resource_group_location
 }
 
 module "securing_adb2c" {

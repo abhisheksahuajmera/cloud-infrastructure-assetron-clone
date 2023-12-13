@@ -104,7 +104,7 @@ jobs:
       tf-plan-exit-code: ${{ steps.tf-plan-qa.outputs.exitcode }}
 
   tf-apply-qa:
-    name: "tf-plan-qa: apply"
+    name: "tf-apply-qa: apply"
 
     timeout-minutes: 5
 

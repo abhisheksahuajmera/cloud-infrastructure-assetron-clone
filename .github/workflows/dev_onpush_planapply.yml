@@ -105,7 +105,7 @@ jobs:
       tf-plan-exit-code: ${{ steps.tf-plan-dev.outputs.exitcode }}
 
   tf-apply-dev:
-    name: "tf-plan-dev: apply"
+    name: "tf-apply-dev: apply"
 
     timeout-minutes: 5
 
