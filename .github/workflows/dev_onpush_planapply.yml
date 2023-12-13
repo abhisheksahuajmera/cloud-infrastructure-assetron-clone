@@ -1,0 +1,180 @@
+name: dev_onpush_planapply
+
+on:
+  push:
+    branches:
+      - dev
+      - "feature_dev_*"
+
+    paths:
+      - ".github/workflows/dev_onpush_planapply.yml"
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+env:
+  WORKING_DIR: .
+  CONFIG_DIR: ./configs
+  CONFIG_FILE: dev.tfvars
+  BACKEND_DIR: ./backends
+  BACKEND_FILE: dev.tf
+  TF_VER: 1.1.0
+  JOB_TIMEOUT_MINUTES_LONG: 5
+
+jobs:
+  tf-plan-dev:
+    name: "tf-plan-dev: init,validate,plan"
+
+    timeout-minutes: 5
+
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/heads/feature_dev') || github.ref == 'refs/heads/dev'
+
+    defaults:
+      run:
+        shell: bash
+        working-directory: .
+
+    environment: dev_plan
+
+    env:
+      AZURE_CLIENT_ID: ${{ secrets.AZURE_DEV_CLIENT_ID }}
+      AZURE_TENANT_ID: ${{ secrets.AZURE_DEV_TENANT_ID }}
+      AZURE_CLIENT_SECRET: ${{ secrets.AZURE_DEV_CLIENT_SECRET }}
+      AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_DEV_SUBSCRIPTION_ID }}
+      ARM_CLIENT_ID: ${{ secrets.AZURE_DEV_CLIENT_ID }}
+      ARM_TENANT_ID: ${{ secrets.AZURE_DEV_TENANT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.AZURE_DEV_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_DEV_SUBSCRIPTION_ID }}
+
+    steps:
+      - run: echo onpush_planapply
+
+      - uses: actions/checkout@v3
+
+      - name: Install Azure cli
+        run: |
+          sudo apt-get install ca-certificates curl apt-transport-https lsb-release gnupg
+          curl -sL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/microsoft.gpg > /dev/null
+          AZ_REPO=$(lsb_release -cs)
+          echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | sudo tee /etc/apt/sources.list.d/azure-cli.list
+          sudo apt-get update
+          sudo apt-get install azure-cli
+
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: "${{ env.TF_VER }}"
+
+      - name: Azure Login
+        run: az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID
+
+      - name: Azure CLI Command
+        run: az account show
+
+      - name: Azure Account Set
+        run: az account set --subscription ${{ secrets.AZURE_DEV_SUBSCRIPTION_ID }}
+
+      - name: Run> terraform init
+        run: |
+          cd "${{ env.WORKING_DIR}}"
+          terraform init -upgrade -input=false -reconfigure -backend-config="${{ env.BACKEND_DIR }}/${{ env.BACKEND_FILE }}"
+
+      - name: Run> terraform validate
+        run: |
+          cd "${{ env.WORKING_DIR}}"
+          terraform validate
+
+      - name: Run> terraform plan
+        id: tf-plan-dev
+        run: |
+          cd "${{ env.WORKING_DIR}}"
+          terraform plan -detailed-exitcode -input=false -var-file="${{ env.CONFIG_DIR }}/${{ env.CONFIG_FILE }}"
+        continue-on-error: true
+
+      - name: Check for "terraform plan" failure
+        if: steps.tf-plan-dev.outputs.exitcode == 1
+        run: exit 1
+
+    outputs:
+      tf-plan-exit-code: ${{ steps.tf-plan-dev.outputs.exitcode }}
+
+  tf-apply-dev:
+    name: "tf-apply-dev: apply"
+
+    timeout-minutes: 5
+
+    runs-on: ubuntu-latest
+    needs: tf-plan-dev
+    if: |
+      needs.tf-plan-dev.outputs.tf-plan-exit-code == 2
+
+    defaults:
+      run:
+        shell: bash
+        working-directory: .
+
+    environment: dev_planapply
+
+    env:
+      AZURE_CLIENT_ID: ${{ secrets.AZURE_DEV_CLIENT_ID }}
+      AZURE_TENANT_ID: ${{ secrets.AZURE_DEV_TENANT_ID }}
+      AZURE_CLIENT_SECRET: ${{ secrets.AZURE_DEV_CLIENT_SECRET }}
+      AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_DEV_SUBSCRIPTION_ID }}
+      ARM_CLIENT_ID: ${{ secrets.AZURE_DEV_CLIENT_ID }}
+      ARM_TENANT_ID: ${{ secrets.AZURE_DEV_TENANT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.AZURE_DEV_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_DEV_SUBSCRIPTION_ID }}
+
+    steps:
+      - run: echo onpush_planapply
+
+      - uses: actions/checkout@v3
+
+      - name: Install Azure cli
+        run: |
+          sudo apt-get install ca-certificates curl apt-transport-https lsb-release gnupg
+          curl -sL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/microsoft.gpg > /dev/null
+          AZ_REPO=$(lsb_release -cs)
+          echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | sudo tee /etc/apt/sources.list.d/azure-cli.list
+          sudo apt-get update
+          sudo apt-get install azure-cli
+
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: "${{ env.TF_VER }}"
+
+      - name: Azure Login
+        run: az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID
+
+      - name: Azure CLI Command
+        run: az account show
+
+      - name: Azure Account Set
+        run: az account set --subscription ${{ secrets.AZURE_DEV_SUBSCRIPTION_ID }}
+
+      - name: Run> terraform init
+        run: |
+          cd "${{ env.WORKING_DIR}}"
+          terraform init -upgrade -input=false -reconfigure -backend-config="${{ env.BACKEND_DIR }}/${{ env.BACKEND_FILE }}"
+
+      - name: Run> terraform validate
+        run: |
+          cd "${{ env.WORKING_DIR}}"
+          terraform validate
+
+      - name: Run> terraform fmt
+        run: |
+          cd "${{ env.WORKING_DIR }}"
+          terraform fmt -check -recursive
+        continue-on-error: true
+
+      - name: Run> terraform apply
+        run: |
+          cd "${{ env.WORKING_DIR}}"
+          terraform apply -auto-approve -var-file="${{ env.CONFIG_DIR }}/${{ env.CONFIG_FILE }}"
