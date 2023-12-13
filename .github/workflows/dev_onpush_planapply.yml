@@ -10,7 +10,7 @@ on:
       - ".github/workflows/dev_onpush_planapply.yml"
 
   workflow_dispatch:
-    
+
 
 permissions:
   contents: read
@@ -112,7 +112,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: tf-plan-dev
     if: |
-      needs.tf-plan-dev.outputs.tf-plan-exit-code == 2 && (startsWith(github.ref, 'refs/heads/feature_dev') || github.ref == 'refs/heads/dev')
+      needs.tf-plan-dev.outputs.tf-plan-exit-code == 2
 
     defaults:
       run:
