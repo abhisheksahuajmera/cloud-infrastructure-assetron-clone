@@ -1,3 +1,8 @@
+# module "caf" {
+#   source  = "aztfmod/caf/azurerm"
+#   version = "~>5.5.0"
+# }
+
 module "bootstrapping_resource_group" {
   source                 = "./modules/resource_group"
   location               = var.resource_group_location
@@ -6,9 +11,9 @@ module "bootstrapping_resource_group" {
   environment_version    = var.environment_version
   resource_group_prefix  = var.resource_group_prefix
   resource_group_version = var.resource_group_location
-  providers = {
-    azurecaf = azurecaf
-  }
+  # providers = {
+  #   azurecaf = azurecaf
+  # }
 }
 
 module "securing_adb2c" {

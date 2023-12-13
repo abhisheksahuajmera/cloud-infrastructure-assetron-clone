@@ -31,14 +31,7 @@ variable "aadb2c_version" {
   default     = "101"
 }
 
-variable "sku_name" {
-  type        = string
-  description = "(Required)"
-  default     = "PremiumP1"
-}
-
 locals {
   display_name          = "${var.prefix}${var.aadb2c_version}"
   domain_name           = "${local.display_name}${var.domain_suffix}"
-  sku_name              = var.sku_name
 }

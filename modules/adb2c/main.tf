@@ -4,5 +4,5 @@ resource "azurerm_aadb2c_directory" "aadb2c_tg" {
   display_name            = local.display_name
   domain_name             = local.domain_name
   resource_group_name     = var.resource_group_name
-  sku_name                = local.sku_name
+  sku_name                = "PremiumP1"
 }
