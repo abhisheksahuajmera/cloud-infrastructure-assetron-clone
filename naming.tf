@@ -18,5 +18,5 @@ resource "azurecaf_name" "adb2c_name" {
 
 locals {
   resource_group_location_modified = replace(var.resource_group_location, " ", "")
-  adb2c_name_modified              = replace(replace(azurecaf_name.adb2c_name.result, "-", " "), "_", " ")
+  adb2c_name_modified              = replace(azurecaf_name.adb2c_name.result, "-", "")
 }
