@@ -39,7 +39,6 @@ variable "sku_name" {
 
 locals {
   display_name          = "${var.prefix}${var.aadb2c_version}"
-  display_name_modified = replace(local.display_name, "-", "")
   domain_name           = "${local.display_name}${var.domain_suffix}"
   sku_name              = var.sku_name
 }
