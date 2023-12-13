@@ -5,12 +5,15 @@
 #   postfix       = var.resource_group_version
 # }
 
-module "azurecaf_naming_convention" {
+module "naming_convention" {
   source  = "Azure/caf-naming/azurerm"
-  # version = "x.x.x"  # Use the appropriate version
+  version = "1.2.10"
 
-  # conventions = {
-  #   # Configure naming convention parameters here
-  # }
+  conventions = {
+    location            = "true"        # Include location in the naming convention
+    environment         = "sandbox"     # Identify the environment (sandbox, prod, etc.)
+    naming_prefix       = "myapp"       # Prefix for resource names
+    platform            = "app"         # Specify the platform (app, db, etc.)
+    resource_group_type = "app_rg"      # Type of resource group (app_rg, data_rg, etc.)
+  }
 }
-

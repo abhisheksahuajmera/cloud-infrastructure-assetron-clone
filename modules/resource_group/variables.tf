@@ -27,3 +27,20 @@ variable "location" {
   type        = string
   description = "Resource Group Location"
 }
+
+variable "azure_provider" {
+  description = "Azure Provider Configuration"
+}
+
+data "azurerm_resource_group" "example" {
+  provider = var.azure_provider
+}
+
+# data "azurecaf_name" "rg_example" {
+#   name          = "demogroup"
+#   resource_type = "azurerm_resource_group"
+#   prefixes      = ["a", "b"]
+#   suffixes      = ["y", "z"]
+#   random_length = 5
+#   clean_input   = true
+# }
