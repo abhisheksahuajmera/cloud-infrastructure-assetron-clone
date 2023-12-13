@@ -5,7 +5,8 @@ module "bootstrapping_resource_group" {
 }
 
 data "azurerm_resource_group" "azurerm_resource_grouptg" {
-  name = local.resource_group_name
+  name     = module.bootstrapping_resource_group.nameop
+  location = module.bootstrapping_resource_group.locationop
 }
 
 module "securing_adb2c" {
