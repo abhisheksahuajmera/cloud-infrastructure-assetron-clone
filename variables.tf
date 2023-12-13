@@ -28,30 +28,6 @@ variable "environment_version" {
   default     = ""
 }
 
-variable "state_resource_group_name" {
-  type        = string
-  description = "Resource Group Name where the state file will be stored"
-  default     = ""
-}
-
-variable "state_storage_account_name" {
-  type        = string
-  description = "Storage Account Name to which the state file is linked"
-  default     = ""
-}
-
-variable "state_container_name" {
-  type        = string
-  description = "Storage Container Name where the state file will be stored"
-  default     = ""
-}
-
-variable "state_key" {
-  type        = string
-  description = "Storage Blob File"
-  default     = ""
-}
-
 variable "resource_group_version" {
   type        = string
   description = "Resource Group Version"

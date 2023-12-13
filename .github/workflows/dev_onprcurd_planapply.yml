@@ -49,10 +49,6 @@ jobs:
       ARM_TENANT_ID: ${{ secrets.AZURE_DEV_TENANT_ID }}
       ARM_CLIENT_SECRET: ${{ secrets.AZURE_DEV_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_DEV_SUBSCRIPTION_ID }}
-      STATE_RESOURCE_GROUP_NAME: ${{ secrets.STATE_DEV_RESOURCE_GROUP_NAME }}
-      STATE_STORAGE_ACCOUNT_NAME: ${{ secrets.STATE_DEV_STORAGE_ACCOUNT_NAME }}
-      STATE_CONTAINER_NAME: ${{ secrets.STATE_DEV_CONTAINER_NAME }}
-      STATE_KEY: ${{ secrets.STATE_DEV_KEY }}
 
     steps:
       - run: echo onprcurd_planapply
@@ -132,10 +128,6 @@ jobs:
       ARM_TENANT_ID: ${{ secrets.AZURE_DEV_TENANT_ID }}
       ARM_CLIENT_SECRET: ${{ secrets.AZURE_DEV_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_DEV_SUBSCRIPTION_ID }}
-      STATE_RESOURCE_GROUP_NAME: ${{ secrets.STATE_DEV_RESOURCE_GROUP_NAME }}
-      STATE_STORAGE_ACCOUNT_NAME: ${{ secrets.STATE_DEV_STORAGE_ACCOUNT_NAME }}
-      STATE_CONTAINER_NAME: ${{ secrets.STATE_DEV_CONTAINER_NAME }}
-      STATE_KEY: ${{ secrets.STATE_DEV_KEY }}
 
     steps:
       - run: echo onprcurd_planapply
