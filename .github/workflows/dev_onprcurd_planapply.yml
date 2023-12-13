@@ -2,7 +2,7 @@ name: dev_onprcurd_planapply
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened, closed]
+    types: [opened, synchronize, reopened]
     branches:
       - dev
     paths:
@@ -31,8 +31,7 @@ jobs:
     timeout-minutes: 5
 
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/dev'
-
+    
     defaults:
       run:
         shell: bash
