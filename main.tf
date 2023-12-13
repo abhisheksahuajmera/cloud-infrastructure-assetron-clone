@@ -11,7 +11,8 @@ module "bootstrapping_resource_group" {
   # environment_version    = var.environment_version
   # resource_group_prefix  = var.resource_group_prefix
   # resource_group_version = var.resource_group_location
-  resource_group_name = data.azurecaf_name.rg_example.result
+  # resource_group_name = data.azurecaf_name.rg_example.result
+  resource_group_name = azurecaf_name.rg_example.result
   # provider_Var = azurecaf
   # providers = {
   #   azurecaf = azurecaf.azurecaf
