@@ -5,8 +5,8 @@ module "bootstrapping_resource_group" {
 }
 
 module "securing_adb2c" {
-  source                  = "./modules/adb2c" // Add version after registry
+  source                  = "./modules/adb2c"
   country_code            = var.resource_group_location_country_code
   data_residency_location = var.resource_group_data_residency_location
-  resource_group_name     = module.bootstrapping_resource_group.resource_group_name
+  resource_group_name     = module.bootstrapping_resource_group.nameop
 }
