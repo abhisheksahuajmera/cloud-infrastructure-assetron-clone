@@ -3,7 +3,6 @@ name: dev_onpush_planapply
 on:
   push:
     branches:
-      - dev
       - "feature_dev_*"
 
     paths:
@@ -11,7 +10,7 @@ on:
 
   workflow_dispatch:  
 
-  
+
 permissions:
   contents: read
   pages: write
@@ -33,7 +32,6 @@ jobs:
     timeout-minutes: 5
 
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/heads/feature_dev') || github.ref == 'refs/heads/dev'
 
     defaults:
       run:
