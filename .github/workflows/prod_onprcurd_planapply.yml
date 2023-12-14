@@ -4,7 +4,7 @@ on:
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
-      - qa
+      - prod
     paths:
       - ".github/workflows/prod_onprcurd_planapply.yml"
 
