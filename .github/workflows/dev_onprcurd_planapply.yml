@@ -10,6 +10,7 @@ on:
 
   workflow_dispatch:
 
+
 permissions:
   contents: read
   pages: write
@@ -31,6 +32,10 @@ jobs:
     timeout-minutes: 5
 
     runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'pull_request' &&
+      startsWith(github.event.pull_request.head.ref, 'feature_Dev') &&
+      github.event.pull_request.base.ref == 'dev'
 
     defaults:
       run:

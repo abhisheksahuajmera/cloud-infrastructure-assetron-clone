@@ -2,13 +2,14 @@ name: qa_onprcurd_planapply
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened, closed]
+    types: [opened, synchronize, reopened]
     branches:
       - qa
     paths:
       - ".github/workflows/qa_onprcurd_planapply.yml"
 
   workflow_dispatch:
+
 
 permissions:
   contents: read
@@ -32,6 +33,11 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    if: |
+      github.event_name == 'pull_request' &&
+      github.event.pull_request.base.ref == 'qa' &&
+      github.event.pull_request.head.ref == 'dev'
+          
     defaults:
       run:
         shell: bash
@@ -51,7 +57,7 @@ jobs:
 
     steps:
       - run: echo onprcurd_planapply
-
+  
       - uses: actions/checkout@v3
 
       - name: Install Azure cli

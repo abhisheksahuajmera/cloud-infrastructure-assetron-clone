@@ -2,7 +2,7 @@ name: prod_onprcurd_planapply
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened, closed]
+    types: [opened, synchronize, reopened]
     branches:
       - prod
     paths:
@@ -31,6 +31,11 @@ jobs:
     timeout-minutes: 5
 
     runs-on: ubuntu-latest
+
+    if: |
+      github.event_name == 'pull_request' &&
+      github.event.pull_request.base.ref == 'prod' &&
+      github.event.pull_request.head.ref == 'qa'
 
     defaults:
       run:
