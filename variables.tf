@@ -22,12 +22,6 @@ variable "environment_version" {
   default     = ""
 }
 
-variable "resource_group_prefix" {
-  type        = string
-  description = "Resource Group Prefix"
-  default     = ""
-}
-
 variable "resource_group_version" {
   type        = string
   description = "Resource Group Version"
