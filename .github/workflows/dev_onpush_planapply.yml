@@ -9,9 +9,8 @@ on:
     paths:
       - ".github/workflows/dev_onpush_planapply.yml"
 
-  workflow_dispatch:
-    
-    
+  workflow_dispatch:  
+
 permissions:
   contents: read
   pages: write
