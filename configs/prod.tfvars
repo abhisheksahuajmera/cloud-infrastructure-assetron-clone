@@ -1,0 +1,6 @@
+org                                    = "Ajmerainfotech"
+project_prefix                         = "Assetronai"
+environment_prefix                     = "prod"
+resource_group_location                = "east us"
+resource_group_location_country_code   = "US"
+resource_group_data_residency_location = "United States"

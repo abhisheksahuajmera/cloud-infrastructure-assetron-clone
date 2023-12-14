@@ -1,0 +1,1 @@
+output "resource_group_name" { value = module.bootstrapping_resource_group.rg_name }
