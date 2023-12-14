@@ -5,11 +5,8 @@ on:
     types: [opened, synchronize, reopened]
     branches:
       - dev
-    paths:
-      - ".github/workflows/dev_onprcurd_planapply.yml"
 
   workflow_dispatch:
-
 
 permissions:
   contents: read
