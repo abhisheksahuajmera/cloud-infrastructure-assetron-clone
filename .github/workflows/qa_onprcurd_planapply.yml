@@ -4,7 +4,7 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
     branches:
-      - dev
+      - qa
     paths:
       - ".github/workflows/qa_onprcurd_planapply.yml"
 
