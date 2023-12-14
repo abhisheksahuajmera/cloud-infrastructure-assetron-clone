@@ -5,8 +5,6 @@ on:
     types: [opened, synchronize, reopened]
     branches:
       - qa
-    paths:
-      - ".github/workflows/qa_onprcurd_planapply.yml"
 
   workflow_dispatch:
 
