@@ -5,11 +5,7 @@ on:
     branches:
       - "feature_qa_*"
 
-    paths:
-      - ".github/workflows/qa_onpush_planapply.yml"
-
   workflow_dispatch:
-
 
 permissions:
   contents: read

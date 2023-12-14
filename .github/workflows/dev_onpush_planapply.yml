@@ -5,11 +5,7 @@ on:
     branches:
       - "feature_dev_*"
 
-    paths:
-      - ".github/workflows/dev_onpush_planapply.yml"
-
   workflow_dispatch:  
-
 
 permissions:
   contents: read
