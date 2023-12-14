@@ -4,9 +4,9 @@ on:
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
-      - qa
+      - dev
     paths:
-      - ".github/workflows/qa_onprcurd_planapply.yml"
+      - ".github/workflows/devtoqa_onprcurd_planapply.yml"
 
   workflow_dispatch:
 
@@ -31,6 +31,7 @@ jobs:
     timeout-minutes: 5
 
     runs-on: ubuntu-latest
+    if: github.event.pull_request.base.ref == 'dev' && github.event.pull_request.head.ref == 'qa'
 
     defaults:
       run:
