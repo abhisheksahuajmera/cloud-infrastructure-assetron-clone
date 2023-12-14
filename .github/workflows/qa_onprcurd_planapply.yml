@@ -4,7 +4,7 @@ on:
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
-      - qa
+      - dev
     paths:
       - ".github/workflows/qa_onprcurd_planapply.yml"
 
@@ -32,6 +32,11 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    if: |
+      github.event_name == 'pull_request' &&
+      github.event.pull_request.base.ref == 'dev' &&
+      github.event.pull_request.head.ref == 'qa'
+          
     defaults:
       run:
         shell: bash
