@@ -3,7 +3,6 @@ name: dev_onpush_planapply
 on:
   push:
     branches:
-      - dev
       - "feature_dev_*"
 
     paths:
