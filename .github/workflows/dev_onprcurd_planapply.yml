@@ -32,6 +32,10 @@ jobs:
 
     runs-on: ubuntu-latest
     # if: startsWith(github.event.pull_request.base.ref, 'refs/heads/feature_dev') && github.event.pull_request.head.ref == 'dev'
+    if: |
+      github.event_name == 'pull_request' &&
+      startsWith(github.event.pull_request.head.ref, 'feature_Dev') &&
+      github.event.pull_request.base.ref == 'dev'
 
     defaults:
       run:

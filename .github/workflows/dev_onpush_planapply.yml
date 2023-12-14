@@ -31,7 +31,6 @@ jobs:
     timeout-minutes: 5
 
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/heads/feature_dev') || github.ref == 'refs/heads/dev'
 
     defaults:
       run:
