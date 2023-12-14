@@ -22,7 +22,7 @@ resource "azurecaf_name" "public_ip_name" {
   resource_type = "azurerm_public_ip"
   prefixes      = ["${var.project_prefix}"]
   suffixes      = [local.resource_group_location_modified]
-  random_length = 0
+  random_length = 1
 }
 
 locals {
