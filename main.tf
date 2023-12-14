@@ -12,9 +12,9 @@ module "bootstrapping_resource_group" {
 #   resource_group_name     = module.bootstrapping_resource_group.rg_name
 # }
 
-module "networking_public_ip" {
-  source              = "./modules/public_ip"
-  name                = azurecaf_name.public_ip_name.result
-  resource_group_name = module.bootstrapping_resource_group.rg_name
-  location            = module.bootstrapping_resource_group.rg_location
-}
+# module "networking_public_ip" {
+#   source              = "./modules/public_ip"
+#   name                = azurecaf_name.public_ip_name.result
+#   resource_group_name = module.bootstrapping_resource_group.rg_name
+#   location            = module.bootstrapping_resource_group.rg_location
+# }
