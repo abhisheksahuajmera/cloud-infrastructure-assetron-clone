@@ -31,7 +31,7 @@ jobs:
     timeout-minutes: 5
 
     runs-on: ubuntu-latest
-    if: startsWith(github.event.pull_request.base.ref, 'refs/heads/feature_dev') && github.event.pull_request.head.ref == 'dev'
+    # if: startsWith(github.event.pull_request.base.ref, 'refs/heads/feature_dev') && github.event.pull_request.head.ref == 'dev'
 
     defaults:
       run:
@@ -51,7 +51,17 @@ jobs:
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_DEV_SUBSCRIPTION_ID }}
 
     steps:
+      - name: Check if branch target
+        id: branch-check
+        run: |
+          if [ startsWith(github.event.pull_request.base.ref, 'refs/heads/feature_dev') ] && [ "${{ github.event.pull_request.head.ref }}" == 'dev' ]; then
+            echo "::set-output name=valid_branch::true"
+          else
+            echo "::set-output name=valid_branch::false"
+          fi
+
       - run: echo onprcurd_planapply
+        if: steps.branch-check.outputs.valid_branch == 'true'
 
       - uses: actions/checkout@v3
 
