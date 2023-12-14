@@ -17,5 +17,5 @@ provider "azurerm" {
 }
 
 provider "azurecaf" {
-  alias = "azurecaf"
+  alias = "azurecaf_alias"
 }
