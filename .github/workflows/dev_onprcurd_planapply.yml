@@ -19,7 +19,7 @@ env:
   CONFIG_FILE: dev.tfvars
   BACKEND_DIR: ./backends
   BACKEND_FILE: dev.tf
-  TF_VER: 1.1.0
+  TF_VER: 1.6.6
   JOB_TIMEOUT_MINUTES_LONG: 5
 
 jobs:
